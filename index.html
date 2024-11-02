@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>iot sAMSAK</title>
+  <link rel="stylesheet" href="./style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="quizContainerPanel" >
+	<h2>SAMSAK </H2>
+	<H1>IOT</H1>
+
+	<!-- Intro -->
+	<div class="quizIntroPanel">
+		<button class="button button5 quizPlayGame" >MULAI</button>
+	</div>
+
+	<!-- Navigation -->
+	<div class="navQuestion">
+		<span class="quizActiveQuestion">POLA MODEL</span>
+	</div>
+
+	<!-- Question 1 -->
+	<div class="quizPanel Question01">
+		<p>LEVEL1</p>
+	
+			
+		  
+			<button type="button" name="start"  onclick="set1_1()">mulai</button>
+			<button type="button" name="pause"  onclick="set1_2()">pause</button>
+			<button type="button" name="reset"  onclick="set1_3()">reset</button>
+		
+	
+		<p>LEVEL2</p>
+	
+		
+		  <button type="button" name="start"  onclick="set2_1()">mulai</button>
+		  <button type="button" name="pause"  onclick="set2_2()">pause</button>
+		  <button type="button" name="reset"  onclick="set2_3()">reset</button>
+		<p>LEVEL3</p>
+
+		
+		
+		<button type="button" name="start"  onclick="set3_1()">mulai</button>
+		<button type="button" name="pause"  onclick="set3_2()">pause</button>
+		<button type="button" name="reset"  onclick="set3_3()">reset</button>
+		  
+
+		  <div class="quizValidationLayer"></div>
+		  <button class="buttonx " onclick="kembali()" > Kembali</button>
+			
+		</div>
+	</div>
+	
+
+
+
+	
+
+	
+
+</div>
+<!-- partial -->
+  <script  src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+   <script  src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-database-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>	
+  <script  src="firebaseConfig.js"></script>
+  <script  src="./script.js"></script>
+</body>
+</html>
