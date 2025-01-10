@@ -1,75 +1,223 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>iot sAMSAK</title>
-  <link rel="stylesheet" href="./style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <title>Document</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 40px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    h1 {
+        color: green;
+        font-size:xx-large;
+    }
+
+    .button {
+  background-color: #ddd;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  font-size:medium;
+}
+
+.button:hover {
+  background-color: #f1f1f1;
+}
+
+</style>
+
 <body>
-<!-- partial:index.partial.html -->
-<div class="quizContainerPanel" >
-	<h2>SAMSAK </H2>
-	<H1>IOT</H1>
+<audio id="myAudio1"><source src="BEL.wav" type="audio/mpeg"></audio>
+<audio id="myAudio2"><source src="pukulan.mp3" type="audio/mpeg"></audio> 
+<audio id="myAudio3"><source src="tendangan.mp3" type="audio/mpeg"></audio> 
+    <div class="alert">
+        <p>Klik Untuk Aktivasi ijin Sound</p>
+        <p class="buttons">
+          <button value="0">Tolak</button>
+          <button value="1">Ijinkan</button>
+        </p>
+      </div >
+      <h1 style="margin-top: 150px">Timer</h1>
+      
+          <div style="padding: 10px;">
+             
+              <span id="hour1">00</span>:<span id="minute1">00</span>:<span id="second1">00</span>:<span id="millisecond1">000</span>
+            </div>
+     
 
-	<!-- Intro -->
-	<div class="quizIntroPanel">
-		<button class="button button5 quizPlayGame" >MULAI</button>
-	</div>
+    <button style="display: none;" id="btn">trigger notification</button>
 
-	<!-- Navigation -->
-	<div class="navQuestion">
-		<span class="quizActiveQuestion">POLA MODEL</span>
-	</div>
+    <button style="background-color: blue;" class="button" id="button_set" onclick="toggleLabel()">
+        mulai
+    </button>
+<div style="margin-top: 50px">
 
-	<!-- Question 1 -->
-	<div class="quizPanel Question01">
-		<p>LEVEL1</p>
-	
-			
-		  
-			<button type="button" name="start"  onclick="set1_1()">mulai</button>
-			<button type="button" name="pause"  onclick="set1_2()">pause</button>
-			<button type="button" name="reset"  onclick="set1_3()">reset</button>
-		
-	
-		<p>LEVEL2</p>
-	
-		
-		  <button type="button" name="start"  onclick="set2_1()">mulai</button>
-		  <button type="button" name="pause"  onclick="set2_2()">pause</button>
-		  <button type="button" name="reset"  onclick="set2_3()">reset</button>
-		<p>LEVEL3</p>
+  <button class="button" style="background-color: green;" onclick="pukul()">Pukulan</button>
+  <button  class="button" style="background-color: yellow;" onclick="tendang()">Tendangan</button>
 
-		
-		
-		<button type="button" name="start"  onclick="set3_1()">mulai</button>
-		<button type="button" name="pause"  onclick="set3_2()">pause</button>
-		<button type="button" name="reset"  onclick="set3_3()">reset</button>
-		  
-
-		  <div class="quizValidationLayer"></div>
-		  <button class="buttonx " onclick="kembali()" > Kembali</button>
-			
-		</div>
-	</div>
-	
-
-
-
-	
-
-	
 
 </div>
-<!-- partial -->
-  <script  src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-   <script  src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-database-compat.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>	
-  <script  src="firebaseConfig.js"></script>
-  <script  src="./script.js"></script>
+
+    
+    <script>
+
+var x1 = document.getElementById("myAudio1"); 
+var x2 = document.getElementById("myAudio2"); 
+var x3 = document.getElementById("myAudio3"); 
+
+
+
+
+
+function start() {
+  bel ();
+  cron = setInterval(() => {
+       timer();  
+       //x3.playbackRate=1;
+       //x3.play();
+       }, 10);
+}
+
+function bel (){
+  x1.play();
+}
+function pukul(){
+  x2.play();
+}
+function tendang(){
+  x3.play();
+}
+
+
+function pause() {clearInterval(cron);}
+function reset() {
+	document.getElementById('hour1').innerText = '00';
+	document.getElementById('minute1').innerText = '00';
+	document.getElementById('second1').innerText = '00';
+	document.getElementById('millisecond1').innerText = '000';
+  }
+
+
+
+
+
+  function returnData(input) {return input >= 10 ? input : `0${input}`}
+
+let hour = 0;
+let hour2 = 0;
+let hour3 = 0;
+
+let minute = 0;
+let minute2 = 0;
+let minute3 = 0;
+
+let second = 0;
+let second2 = 0;
+let second3 = 0;
+
+let millisecond = 0;
+let millisecond2 = 0;
+let millisecond3 = 0;
+
+let cron;
+let cron2;
+let cron3;
+
+function timer() {
+  if ((millisecond += 10) == 1000) {
+    millisecond = 0;
+    second++;
+  }
+  if (second == 60) {
+    second = 0;
+    minute++;
+  }
+  if (minute == 60) {
+    minute = 0;
+    hour++;
+  }
+  document.getElementById('hour1').innerText = returnData(hour);
+  document.getElementById('minute1').innerText = returnData(minute);
+  document.getElementById('second1').innerText = returnData(second);
+  document.getElementById('millisecond1').innerText = returnData(millisecond);
+}
+
+
+
+
+function toggleLabel() {
+            const btn = 
+                document.getElementById('button_set');
+            if (btn.innerText === 'mulai') {
+                btn.innerText = 'stop';
+                start();
+            } else {
+                btn.innerText = 'mulai';
+                bel ();
+                pause();
+                
+            }
+        }
+
+
+const audio = new Audio( 'https://dl.dropboxusercontent.com/s/h8pvqqol3ovyle8/tom.mp3' );
+audio.muted = true;
+const alert_elem = document.querySelector( '.alert' );
+audio.play().then( () => {
+  // already allowed
+  alert_elem.remove();
+  resetAudio();
+} )
+.catch( () => {
+ 
+  alert_elem.addEventListener( 'click', ({ target }) => {
+    if( target.matches('button') ) {
+      const allowed = target.value === "1";
+      if( allowed ) {
+        audio.play()
+          .then( resetAudio );
+      }
+      alert_elem.remove();
+    }
+  } );
+} );
+
+document.getElementById( 'btn' ).addEventListener( 'click', (e) => {
+  if( audio.muted ) {
+    console.log( 'silent notification' );
+  }
+  else {
+    audio.play();
+  }
+} );
+
+function resetAudio() {
+  audio.pause();
+  audio.currentTime = 0;
+  audio.muted = false;
+}
+
+
+
+
+    </script>
 </body>
 </html>
