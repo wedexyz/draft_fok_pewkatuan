@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
     <title>Document</title>
 </head>
 <style>
@@ -64,10 +63,13 @@
      
 
     <button style="display: none;" id="btn">trigger notification</button>
-
+    <button onclick="resetb()" class="button" style="background-color: blue;">reset</button>
+<!--
     <button style="background-color: blue;" class="button" id="button_set" onclick="toggleLabel()">
         mulai
     </button>
+    -->
+    
 <div style="margin-top: 50px">
 
   <button class="button" style="background-color: green;" onclick="pukul()">Pukulan</button>
@@ -76,7 +78,14 @@
 
 </div>
 
-    
+<a href="kompt.html">link ke laptop</a>
+
+<script  src="https://www.gstatic.com/firebasejs/10.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore-compat.js"></script>	
+<script src="firebaseConfig.js"></script>
+
     <script>
 
 var x1 = document.getElementById("myAudio1"); 
@@ -84,8 +93,15 @@ var x2 = document.getElementById("myAudio2");
 var x3 = document.getElementById("myAudio3"); 
 
 
+level_1      =  firebase.database().ref('set2');
 
-
+level_1.on("value", function(snapshot) {
+    console.log(snapshot.val() );
+    if (snapshot.val() >0) {start() ;}
+    else {pause();}
+    
+    
+});
 
 function start() {
   bel ();
@@ -160,9 +176,12 @@ function timer() {
   document.getElementById('millisecond1').innerText = returnData(millisecond);
 }
 
+function resetb(){
+  reset();
 
+}
 
-
+/*
 function toggleLabel() {
             const btn = 
                 document.getElementById('button_set');
@@ -177,7 +196,7 @@ function toggleLabel() {
             }
         }
 
-
+*/
 const audio = new Audio( 'https://dl.dropboxusercontent.com/s/h8pvqqol3ovyle8/tom.mp3' );
 audio.muted = true;
 const alert_elem = document.querySelector( '.alert' );
@@ -214,7 +233,12 @@ function resetAudio() {
   audio.currentTime = 0;
   audio.muted = false;
 }
-
+function reset() {
+	document.getElementById('hour1').innerText = '00';
+	document.getElementById('minute1').innerText = '00';
+	document.getElementById('second1').innerText = '00';
+	document.getElementById('millisecond1').innerText = '000';
+  }
 
 
 
